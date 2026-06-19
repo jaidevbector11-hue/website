@@ -112,10 +112,12 @@
       // ---- Path A: a real form endpoint is configured (e.g. Formspree) ----
       if (configured) {
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+        var payload = new FormData(form);
+        payload.set("_subject", "New quote request – " + (data.service || "Landscaping") + " (" + data.name + ")");
         fetch(action, {
           method: "POST",
           headers: { "Accept": "application/json" },
-          body: new FormData(form)
+          body: payload
         }).then(function (res) {
           if (res.ok) {
             form.reset();

@@ -454,8 +454,14 @@
 
         <div class="quote__form-wrap reveal">
           <form class="quote-form" id="quote-form" novalidate
-                action="https://formspree.io/f/your-form-id" method="POST">
+                action="https://formspree.io/f/mzdqnaqr" method="POST">
             <h3 class="quote-form__title">Request a Quote</h3>
+
+            <!-- Formspree: default email subject (overridden per-service by script.js) -->
+            <input type="hidden" name="_subject" value="New quote request from website" />
+            <!-- Honeypot: hidden from people, bots fill it in and get blocked -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
 
             <div class="field">
               <label for="name">Name</label>

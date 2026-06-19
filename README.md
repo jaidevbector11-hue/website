@@ -36,21 +36,23 @@ Pick any one — no build step is needed.
 - **Netlify / Vercel / Cloudflare Pages:** drag-and-drop the folder, or connect the repo.
 - **Any web host:** upload `index.html`, `styles.css`, and `script.js` to the web root.
 
-## 📨 Make the quote form deliver to your inbox
+## 📨 Quote form / where leads go
 
-The form already works **with zero setup**: when a visitor submits it, it opens a
-pre-filled **text message** (on phones) or **email** (on desktop) addressed to the
-business, so a lead is never lost. Hitting send delivers the details to
-`(646) 824-0022` / `jaidevbector11@gmail.com`.
+The form is connected to **[Formspree](https://formspree.io/)**. When a visitor
+submits it, the request is sent to your Formspree form and you receive it two ways:
 
-For a seamless "submit and you're done" experience, connect a free form backend:
+- an **email per lead** to `jaidevbector11@gmail.com`, and
+- a record in your **Formspree dashboard** (log in to view/export all submissions).
 
-1. Create a free form at **[Formspree](https://formspree.io/)** (or use Netlify Forms).
-2. Copy your form endpoint (looks like `https://formspree.io/f/abcdwxyz`).
-3. In `index.html`, find the `<form ... action="https://formspree.io/f/your-form-id">`
-   and replace `your-form-id` with your real endpoint.
+The visitor sees an inline *"Thanks, …! Your request was sent."* confirmation — no
+mail app, no extra steps.
 
-That's it — submissions will email you directly, and the page shows a success message.
+**To point it at a different Formspree form:** replace the endpoint in the
+`<form ... action="https://formspree.io/f/…">` tag in `index.html`.
+
+> If the endpoint is ever removed/blank, `script.js` automatically falls back to
+> opening a pre-filled text/email to `(646) 824-0022` / `jaidevbector11@gmail.com`
+> so a lead is never silently lost.
 
 ## ✏️ Updating content
 
