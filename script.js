@@ -4,8 +4,8 @@
 (function () {
   "use strict";
 
-  var BUSINESS_PHONE = "+16109729913";       // tel:/sms: target
-  var BUSINESS_EMAIL = "newlook1143@gmail.com";
+  var BUSINESS_PHONE = "+16468240022";       // tel:/sms: target
+  var BUSINESS_EMAIL = "jaidevbector11@gmail.com";
 
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById("year");
@@ -74,7 +74,7 @@
     status.classList.add(ok ? "form-status--ok" : "form-status--err");
   }
 
-  // Light-touch phone formatting as the user types: (610) 972-9913
+  // Light-touch phone formatting as the user types: (646) 824-0022
   var phoneInput = document.getElementById("phone");
   if (phoneInput) {
     phoneInput.addEventListener("input", function () {
@@ -119,7 +119,7 @@
         }).then(function (res) {
           if (res.ok) {
             form.reset();
-            setStatus("Thanks, " + (data.name || "there") + "! Your request was sent. We'll be in touch shortly. For the fastest response, call (610) 972-9913.", true);
+            setStatus("Thanks, " + (data.name || "there") + "! Your request was sent. We'll be in touch shortly. For the fastest response, call (646) 824-0022.", true);
           } else {
             throw new Error("Bad response");
           }
@@ -155,13 +155,13 @@
       // Open the Messages app pre-filled to the business number
       var sep = /iPhone|iPad|iPod/i.test(navigator.userAgent) ? "&" : "?";
       window.location.href = "sms:" + BUSINESS_PHONE + sep + "body=" + encodeURIComponent(body);
-      setStatus("Almost done! Your text message is ready — just hit send. Prefer to call? (610) 972-9913.", true);
+      setStatus("Almost done! Your text message is ready — just hit send. Prefer to call? (646) 824-0022.", true);
     } else {
       var subject = "Quote request — " + (data.service || "Landscaping") + " (" + data.name + ")";
       window.location.href = "mailto:" + BUSINESS_EMAIL +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
-      setStatus("Almost done! Your email is ready to send in your mail app. Prefer to call? (610) 972-9913.", true);
+      setStatus("Almost done! Your email is ready to send in your mail app. Prefer to call? (646) 824-0022.", true);
     }
   }
 })();

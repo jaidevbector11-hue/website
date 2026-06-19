@@ -41,7 +41,7 @@ Pick any one — no build step is needed.
 The form already works **with zero setup**: when a visitor submits it, it opens a
 pre-filled **text message** (on phones) or **email** (on desktop) addressed to the
 business, so a lead is never lost. Hitting send delivers the details to
-`(610) 972-9913` / `newlook1143@gmail.com`.
+`(646) 824-0022` / `jaidevbector11@gmail.com`.
 
 For a seamless "submit and you're done" experience, connect a free form backend:
 
@@ -56,8 +56,8 @@ That's it — submissions will email you directly, and the page shows a success 
 
 Everything is plain text in `index.html`:
 
-- **Phone number:** search for `6109729913` (used in `tel:`/`sms:` links and on-page text).
-- **Email:** search for `newlook1143@gmail.com`.
+- **Phone number:** search for `6468240022` (used in `tel:`/`sms:` links and on-page text).
+- **Email:** search for `jaidevbector11@gmail.com`.
 - **Services, About, Reviews:** edit the text inside the matching `<section>`.
 - **Add real reviews:** duplicate a `<figure class="review">` block and edit the quote.
 
