@@ -38,20 +38,14 @@ Pick any one — no build step is needed.
 
 ## 📨 Quote form / where leads go
 
-The form is connected to **[Formspree](https://formspree.io/)**. When a visitor
-submits it, the request is sent to your Formspree form and you receive it two ways:
+The form posts submissions to a **Google Sheet** via a free **Google Apps Script**
+web app. Paste your script's `/exec` URL into the `action="…"` of
+`<form id="quote-form">` in `index.html`. Each submission appends a row
+(Timestamp, Name, Phone, Address, Service, Details) to the Sheet, and the visitor
+sees an inline *"Thanks, …! Your request was sent."* confirmation.
 
-- an **email per lead** to `jaidevbector11@gmail.com`, and
-- a record in your **Formspree dashboard** (log in to view/export all submissions).
-
-The visitor sees an inline *"Thanks, …! Your request was sent."* confirmation — no
-mail app, no extra steps.
-
-**To point it at a different Formspree form:** replace the endpoint in the
-`<form ... action="https://formspree.io/f/…">` tag in `index.html`.
-
-> If the endpoint is ever removed/blank, `script.js` automatically falls back to
-> opening a pre-filled text/email to `(646) 824-0022` / `jaidevbector11@gmail.com`
+> Until a real endpoint is set in `action`, `script.js` automatically falls back to
+> opening a pre-filled text/email to `(646) 824-0022` / `jaidevbector11@gmail.com`,
 > so a lead is never silently lost.
 
 ## ✏️ Updating content

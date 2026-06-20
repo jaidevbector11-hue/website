@@ -107,24 +107,22 @@
 
       var submitBtn = form.querySelector('button[type="submit"]');
       var action = form.getAttribute("action") || "";
-      var configured = action && action.indexOf("your-form-id") === -1;
+      var configured = /^https?:\/\//i.test(action);
 
-      // ---- Path A: a real form endpoint is configured (e.g. Formspree) ----
+      // ---- Path A: a real endpoint is configured (Google Apps Script -> Google Sheet) ----
       if (configured) {
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
-        var payload = new FormData(form);
-        payload.set("_subject", "New quote request – " + (data.service || "Landscaping") + " (" + data.name + ")");
+        // Apps Script web apps don't send CORS headers, so we POST with
+        // mode:"no-cors". The row is still written to the Sheet; the response
+        // is opaque, so we confirm optimistically and fall back only if the
+        // request itself fails (e.g. no network).
         fetch(action, {
           method: "POST",
-          headers: { "Accept": "application/json" },
-          body: payload
-        }).then(function (res) {
-          if (res.ok) {
-            form.reset();
-            setStatus("Thanks, " + (data.name || "there") + "! Your request was sent. We'll be in touch shortly. For the fastest response, call (646) 824-0022.", true);
-          } else {
-            throw new Error("Bad response");
-          }
+          mode: "no-cors",
+          body: new FormData(form)
+        }).then(function () {
+          form.reset();
+          setStatus("Thanks, " + (data.name || "there") + "! Your request was sent. We'll be in touch shortly. For the fastest response, call (646) 824-0022.", true);
         }).catch(function () {
           fallbackSend(data);
         }).finally(function () {
