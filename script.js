@@ -62,6 +62,17 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
+  /* ---------- Gallery: gracefully handle tiles with no photo yet ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".shot img"), function (img) {
+    function markMissing() {
+      var fig = img.closest(".shot");
+      if (fig) fig.classList.add("shot--noimg");
+      img.remove(); // remove the broken-image element; the styled placeholder stays
+    }
+    img.addEventListener("error", markMissing);
+    if (img.complete && img.naturalWidth === 0) markMissing();
+  });
+
   /* ---------- Quote form ---------- */
   var form = document.getElementById("quote-form");
   var status = document.getElementById("form-status");
@@ -97,12 +108,18 @@
         return;
       }
 
+      // Read via form.elements (form.name would return the <form>'s own name attribute)
+      function fieldVal(n) {
+        var el = form.elements[n];
+        return el ? (el.value || "").trim() : "";
+      }
       var data = {
-        name: (form.name && form.name.value || "").trim(),
-        phone: (form.phone && form.phone.value || "").trim(),
-        address: (form.address && form.address.value || "").trim(),
-        service: (form.service && form.service.value || "").trim(),
-        details: (form.details && form.details.value || "").trim()
+        name: fieldVal("name"),
+        phone: fieldVal("phone"),
+        email: fieldVal("email"),
+        address: fieldVal("address"),
+        service: fieldVal("service"),
+        details: fieldVal("details")
       };
 
       var submitBtn = form.querySelector('button[type="submit"]');
@@ -119,6 +136,7 @@
         var body = new URLSearchParams({
           name: data.name,
           phone: data.phone,
+          email: data.email,
           address: data.address,
           service: data.service,
           details: data.details
@@ -150,6 +168,7 @@
       "New quote request from website:",
       "Name: " + data.name,
       "Phone: " + data.phone,
+      "Email: " + data.email,
       "Address: " + data.address,
       "Service: " + data.service
     ];

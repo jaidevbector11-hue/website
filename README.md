@@ -13,6 +13,8 @@ JavaScript), so it loads fast, ranks well, and can be hosted anywhere for free.
 | `index.html` | All page content + local-SEO structured data |
 | `styles.css` | Styling, layout, and responsive/mobile design |
 | `script.js`  | Mobile menu, scroll animations, and the quote form |
+| `google-apps-script.gs` | Backend for the quote form (Sheet + email alerts) — paste into Apps Script |
+| `images/`    | Drop project photos here for the gallery (see `images/README.md`) |
 
 ## 🌿 Features
 
@@ -39,14 +41,23 @@ Pick any one — no build step is needed.
 ## 📨 Quote form / where leads go
 
 The form posts submissions to a **Google Sheet** via a free **Google Apps Script**
-web app. Paste your script's `/exec` URL into the `action="…"` of
-`<form id="quote-form">` in `index.html`. Each submission appends a row
-(Timestamp, Name, Phone, Address, Service, Details) to the Sheet, and the visitor
-sees an inline *"Thanks, …! Your request was sent."* confirmation.
+web app (no third-party service). The script (`google-apps-script.gs`) does three
+things on every submission:
 
-> Until a real endpoint is set in `action`, `script.js` automatically falls back to
-> opening a pre-filled text/email to `(646) 824-0022` / `jaidevbector11@gmail.com`,
-> so a lead is never silently lost.
+1. Appends a row to the Sheet — **Timestamp, Name, Phone, Email, Address, Service, Details**
+2. Emails **you** (`jaidevbector11@gmail.com`) an alert, with reply-to set to the customer
+3. Emails the **customer** a "we received your request" confirmation
+
+The visitor sees an inline *"Thanks, …! Your request was sent."* confirmation.
+
+**Wiring:** the deployed script's `/exec` URL goes in the `action="…"` of
+`<form id="quote-form">` in `index.html`. Setup/redeploy steps are in the header
+comment of `google-apps-script.gs`.
+
+> Because Apps Script returns an opaque (CORS) response, the success message is shown
+> optimistically — the Google Sheet is the source of truth. If the endpoint is ever
+> blank/unreachable, `script.js` falls back to a pre-filled text/email to
+> `(646) 824-0022` / `jaidevbector11@gmail.com`, so a lead is never silently lost.
 
 ## ✏️ Updating content
 
@@ -57,12 +68,17 @@ Everything is plain text in `index.html`:
 - **Services, About, Reviews:** edit the text inside the matching `<section>`.
 - **Add real reviews:** duplicate a `<figure class="review">` block and edit the quote.
 
-### Want real photos?
+### Gallery photos
 
-The design uses clean illustrations so it always renders perfectly. To feature real
-project photos (lawns, patios, tree work), add your images to the repo and either set
-them as section backgrounds in `styles.css` or drop `<img>` tags into the relevant
-sections. Photos of your actual work convert best.
+The **Our Work** gallery shows polished colored placeholders until you add photos.
+Drop your real project pictures into `images/` named `gallery-1.jpg` … `gallery-6.jpg`
+and they appear automatically — see `images/README.md` for the per-tile mapping.
+
+### Service-area map
+
+The map under **Service Area** is a keyless Google Maps embed centered on Bethlehem, PA.
+To recenter it, edit the `q=Bethlehem,Pennsylvania` part of the `<iframe src>` in the
+`#area` section of `index.html`.
 
 ### Brand colors
 

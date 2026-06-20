@@ -442,6 +442,57 @@ a:hover { color: var(--green-600); }
 }
 .review figcaption { color: #a9cbb4; font-size: .9rem; }
 
+/* ---------- Gallery ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.shot {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: linear-gradient(150deg, var(--green-600), var(--green-900));
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.shot:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shot figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 34px 16px 14px;
+  font-family: var(--display); font-weight: 700; color: #fff; font-size: 1.02rem;
+  background: linear-gradient(transparent, rgba(8, 40, 24, .85));
+  z-index: 2;
+}
+/* Varied tints so the photo-less placeholders look intentional */
+.shot:nth-child(2) { background: linear-gradient(150deg, #2e9e54, #14532d); }
+.shot:nth-child(3) { background: linear-gradient(150deg, #176231, #0c3d24); }
+.shot:nth-child(4) { background: linear-gradient(150deg, #1f7a3d, #0f5132); }
+.shot:nth-child(5) { background: linear-gradient(150deg, #2e9e54, #176231); }
+.shot:nth-child(6) { background: linear-gradient(150deg, #14532d, #0a3120); }
+/* Subtle motif shown only when a tile has no photo yet */
+.shot--noimg::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, .10), transparent 60%),
+    radial-gradient(circle at 76% 72%, rgba(155, 214, 74, .20), transparent 55%);
+}
+.gallery__note { text-align: center; color: var(--muted); margin: 26px 0 0; }
+
+/* ---------- Service area / map ---------- */
+.map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  line-height: 0;
+}
+.map iframe { display: block; width: 100%; }
+
 /* ---------- Quote / contact ---------- */
 .quote {
   display: grid;
