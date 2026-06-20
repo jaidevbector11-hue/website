@@ -112,14 +112,21 @@
       // ---- Path A: a real endpoint is configured (Google Apps Script -> Google Sheet) ----
       if (configured) {
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
-        // Apps Script web apps don't send CORS headers, so we POST with
-        // mode:"no-cors". The row is still written to the Sheet; the response
-        // is opaque, so we confirm optimistically and fall back only if the
-        // request itself fails (e.g. no network).
+        // Send as application/x-www-form-urlencoded (URLSearchParams) — Apps
+        // Script reliably parses this into e.parameter. mode:"no-cors" because
+        // Apps Script returns no CORS headers, so the response is opaque: we
+        // confirm optimistically and fall back only on a network error.
+        var body = new URLSearchParams({
+          name: data.name,
+          phone: data.phone,
+          address: data.address,
+          service: data.service,
+          details: data.details
+        });
         fetch(action, {
           method: "POST",
           mode: "no-cors",
-          body: new FormData(form)
+          body: body
         }).then(function () {
           form.reset();
           setStatus("Thanks, " + (data.name || "there") + "! Your request was sent. We'll be in touch shortly. For the fastest response, call (646) 824-0022.", true);
