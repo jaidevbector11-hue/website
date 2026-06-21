@@ -516,6 +516,14 @@ a.contact-line:hover { transform: translateX(3px); box-shadow: var(--shadow); }
 .contact-line small { display: block; color: var(--muted); font-size: .78rem; }
 .contact-line strong { font-family: var(--display); font-size: 1.02rem; }
 
+.open-badge {
+  display: inline-block;
+  font-size: .66rem; font-weight: 700; letter-spacing: .02em;
+  padding: 2px 8px; border-radius: 999px; vertical-align: middle; margin-left: 2px;
+}
+.open-badge--open   { background: #e7f6ec; color: var(--green-800); }
+.open-badge--closed { background: #eef1ef; color: #6b7c72; }
+
 .quote__form-wrap {
   background: #fff;
   border: 1px solid var(--line);

@@ -66,7 +66,14 @@
       "@type": "AggregateRating",
       "ratingValue": "5",
       "reviewCount": "3"
-    }
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "07:00", "closes": "15:00" }
+    ],
+    "sameAs": [
+      "https://nextdoor.com/page/new-look-mowing-landscaping-city"
+    ]
   }
   </script>
 </head>
@@ -490,6 +497,13 @@
                 <strong>Bethlehem, PA &amp; nearby</strong>
               </span>
             </div>
+            <div class="contact-line">
+              <span class="contact-line__icon">🕖</span>
+              <span>
+                <small>Hours <span class="open-badge" id="open-status" hidden></span></small>
+                <strong>Mon–Fri 7am–5pm · Sat &amp; Sun 7am–3pm</strong>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -621,6 +635,8 @@
           <li><a href="sms:+16468240022">💬 Text us</a></li>
           <li><a href="mailto:jaidevbector11@gmail.com">✉️ jaidevbector11@gmail.com</a></li>
           <li>📍 Bethlehem, PA &amp; surrounding areas</li>
+          <li>🕖 Mon–Fri 7am–5pm · Sat–Sun 7am–3pm</li>
+          <li><a href="https://nextdoor.com/page/new-look-mowing-landscaping-city" target="_blank" rel="noopener">🏡 Find us on Nextdoor</a></li>
         </ul>
         <a href="#quote" class="btn btn--accent btn--sm footer__cta">Get a Free Quote</a>
       </div>

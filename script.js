@@ -11,6 +11,27 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Open now / Closed badge (computed in business' Eastern Time) ----------
+     Hours: Mon–Fri 7am–5pm, Sat & Sun 7am–3pm. */
+  (function openStatus() {
+    var el = document.getElementById("open-status");
+    if (!el) return;
+    try {
+      // Wall-clock time in America/New_York regardless of the visitor's timezone
+      var et = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+      var day = et.getDay();                       // 0 = Sun … 6 = Sat
+      var mins = et.getHours() * 60 + et.getMinutes();
+      var open = 7 * 60;                            // 7:00 am
+      var close = (day === 0 || day === 6) ? 15 * 60 : 17 * 60; // 3pm weekends, 5pm weekdays
+      var isOpen = mins >= open && mins < close;
+      el.hidden = false;
+      el.textContent = isOpen ? "Open now" : "Closed";
+      el.classList.add(isOpen ? "open-badge--open" : "open-badge--closed");
+    } catch (e) {
+      /* leave the badge hidden; the hours text still shows */
+    }
+  })();
+
   /* ---------- Mobile navigation ---------- */
   var toggle = document.getElementById("nav-toggle");
   var nav = document.getElementById("primary-nav");
